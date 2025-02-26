@@ -25,7 +25,7 @@ export default function Cadastro() {
             Alert.alert(response.data.message);
         }, (error)=>{
             console.log(error)
-            Alert.alert(error.response.error.message)
+            Alert.alert(error.response.data.error)
         }
     );
   }
