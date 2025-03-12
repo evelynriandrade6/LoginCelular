@@ -19,8 +19,9 @@ export default function Login({ navigation }) {
   async function handleLogin() {
     await api.postLogin(user).then(
         (response)=>{
-            console.log(response.data.message)
-            Alert.alert(response.data.message)
+            console.log(response.data.message);
+            Alert.alert(response.data.message);
+            navigation.navigate('Home');
         }, (error)=>{
             console.log(error)
         }
