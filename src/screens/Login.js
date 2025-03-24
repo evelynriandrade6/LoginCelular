@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import api from "../axios/axios";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Login({ navigation }) {
+export default function Login() {
+  const navigation = useNavigation();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -74,6 +76,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 30,
+    
   },
   title: {
     fontSize: 28,
@@ -81,15 +85,15 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    height: 40,
+    height: 50,
     borderBottomWidth: 1,
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 160,
   },
   button: {
     backgroundColor: "green",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 6,
   },
   passwordContainer: {
     flexDirection: "row",
@@ -100,6 +104,6 @@ const styles = StyleSheet.create({
   },
   passwordInput: {
     flex: 1,
-    height: 40,
+    height: 50,
   },
 });
