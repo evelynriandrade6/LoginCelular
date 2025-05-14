@@ -22,14 +22,12 @@ export default function Login() {
   });
 
   async function saveToken(token) {
-    await SecureStore.setItemAsync("token", toString(token));
-    console.log(token);
+    await SecureStore.setItemAsync("token", token);
   }
 
   async function handleLogin() {
     await api.postLogin(user).then(
       (response) => {
-        console.log(response.data.message);
         Alert.alert(response.data.message);
         saveToken(response.data.token)
         navigation.navigate("EventosScreen");

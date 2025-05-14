@@ -10,6 +10,8 @@ import {
   ActivityIndicator,
   TextInput,
 } from "react-native";
+import * as SecureStore from 'expo-secure-store';
+import { useNavigation } from "@react-navigation/native";
 
 export default function EventosScreen() {
   const [eventos, setEventos] = useState([]);
@@ -46,11 +48,14 @@ export default function EventosScreen() {
 
   useEffect(() => {
     getEventos();
-  });
+  },[]);
 
   async function getEventos() {
+   // const token = await SecureStore.getItemAsync("token");
+   // console.log(token);
     try {
       const response = await api.getEventos();
+      console.log(response.data);
       setEventos(response.data.eventos);
       setLoading(false);
     } catch (error) {
@@ -69,9 +74,14 @@ export default function EventosScreen() {
       console.log("Erro ao buscar ingressos", error.response);
     }
   }
-
+const navigation = useNavigation()
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => {
+        navigation.navigate("CadastroEvento");
+      }}>
+        <Text>Criar novo Evento</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>Eventos Disponíveis</Text>
       {loading ? (
         <ActivityIndicator size="large" color="blue" />
@@ -86,7 +96,7 @@ export default function EventosScreen() {
             >
               <Text style={styles.eventName}>{item.nome}</Text>
               <Text>{item.local}</Text>
-              <Text>{new Date(item.data_hora).toLocaleString}</Text>
+              <Text>{new Date(item.data_hora).toLocaleString()}</Text>
             </TouchableOpacity>
           )}
         />
